@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  auth0Id   String   @unique @map("auth0_sub")
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  eventsCreated Event[]
+  memberships   EventMember[]
+  photosUploaded Photo[]
+  photoAppearances PhotoPeople[]
+
+  @@map("users")
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  name      String
+  joinCode  String   @unique @map("join_code")
+  createdBy String   @map("created_by")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  creator   User     @relation(fields: [createdBy], references: [id])
+  members   EventMember[]
+  photos    Photo[]
+
+  @@map("events")
+}
+
+model EventMember {
+  eventId   String   @map("event_id")
+  userId    String   @map("user_id")
+  role      String   // "ADMIN" | "MEMBER"
+  joinedAt  DateTime @default(now()) @map("joined_at")
+
+  event     Event    @relation(fields: [eventId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@id([eventId, userId])
+  @@map("event_members")
+}
+
+model Photo {
+  id        String   @id @default(uuid())
+  eventId   String?  @map("event_id")
+  uploaderId String  @map("uploader_id")
+  s3Key     String   @map("s3_key")
+  isReference Boolean @default(false) @map("is_reference")
+  status    String   // "PENDING_UPLOAD" | "UPLOADED" | "PROCESSING" | "READY" | "FAILED"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  event     Event?   @relation(fields: [eventId], references: [id])
+  uploader  User     @relation(fields: [uploaderId], references: [id])
+  people    PhotoPeople[]
+
+  @@map("photos")
+}
+
+model PhotoPeople {
+  photoId    String   @map("photo_id")
+  userId     String   @map("user_id")
+  confidence Float
+  source     String   // "FACE_MATCH" | "UPLOADER"
+
+  photo      Photo    @relation(fields: [photoId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@id([photoId, userId])
+  @@map("photo_people")
+}
