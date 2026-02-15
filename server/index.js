@@ -3,7 +3,12 @@ const cors = require('cors');
 require('dotenv').config();
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const { auth } = require('express-oauth2-jwt-bearer');
 
+const checkJwt = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
+});
 // Import the AWS tools we need
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { RekognitionClient, IndexFacesCommand, SearchFacesByImageCommand } = require('@aws-sdk/client-rekognition');
@@ -45,9 +50,10 @@ app.get('/test-db', async (req, res) => {
     res.status(500).json({ error: 'Database connection failed' });
   }
 });
-app.post('/enroll-face', async (req, res) => {
+app.post('/enroll-face', checkJwt, async (req, res) => {
   try {
-    const { s3Key, userId, name } = req.body;
+    const { s3Key, name } = req.body;
+    const userId = req.auth.payload.sub;
 
     // Create or update user in database
     const { error: userError } = await supabase
@@ -86,9 +92,10 @@ app.post('/enroll-face', async (req, res) => {
 });
 
 // NEW: Generate a presigned URL for uploading
-app.post('/upload-url', async (req, res) => {
+app.post('/upload-url', checkJwt, async (req, res) => {
   try {
-    const { fileName, fileType, uploaderId } = req.body;
+    const { fileName, fileType } = req.body;
+    const uploaderId = req.auth.payload.sub;
     
     const s3Key = `photos/${Date.now()}-${fileName}`;
 
@@ -116,7 +123,7 @@ app.post('/upload-url', async (req, res) => {
   }
 });
 
-app.post('/photo-processed', async (req, res) => {
+app.post('/photo-processed', checkJwt, async (req, res) => {
   try {
     const { s3Key, photoId } = req.body;
 
@@ -156,9 +163,9 @@ app.post('/photo-processed', async (req, res) => {
   }
 });
 // Get all photos the user appears in
-app.get('/my-photos', async (req, res) => {
+app.get('/my-photos', checkJwt,async (req, res) => {
   try {
-    const { userId } = req.query;
+    const userId = req.auth.payload.sub;
 
     const { data, error } = await supabase
       .from('photo_users')
@@ -176,9 +183,10 @@ app.get('/my-photos', async (req, res) => {
 });
 
 // Hide a photo from user's gallery
-app.post('/hide-photo', async (req, res) => {
+app.post('/hide-photo', checkJwt, async (req, res) => {
   try {
-    const { photoId, userId } = req.body;
+    const { photoId } = req.body;
+    const userId = req.auth.payload.sub;
 
     const { error } = await supabase
       .from('photo_users')
