@@ -1,0 +1,211 @@
+.uploadPage {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.headerIcon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: var(--accent-light);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 0.938rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Dropzone */
+.dropzone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 60px 24px;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzoneActive {
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+
+.dropzoneIcon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.dropzoneText {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.dropzoneHint {
+    font-size: 0.813rem;
+    color: var(--text-tertiary);
+}
+
+.hiddenInput {
+    display: none;
+}
+
+/* File list */
+.fileList {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fileItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+}
+
+.fileThumb {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.fileInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.fileName {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fileSize {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.fileStatus {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+
+.filePending {
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+}
+
+.fileUploading {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.fileDone {
+    background: #ecfdf5;
+    color: var(--success);
+}
+
+.fileError {
+    background: #fef2f2;
+    color: var(--danger);
+}
+
+.removeFile {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+}
+
+.removeFile:hover {
+    color: var(--danger);
+}
+
+/* Upload button */
+.uploadBtn {
+    margin-top: 24px;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Results */
+.results {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    text-align: center;
+}
+
+.resultsIcon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.resultsTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.resultsText {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Progress bar */
+.progressBar {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}

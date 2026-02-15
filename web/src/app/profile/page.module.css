@@ -1,0 +1,166 @@
+.profilePage {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+}
+
+/* User card */
+.userCard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 32px;
+}
+
+.userAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 3px solid var(--border);
+}
+
+.userInfo {
+    flex: 1;
+}
+
+.userName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.userEmail {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+/* Section headers */
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.sectionTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sectionCount {
+    font-size: 0.813rem;
+    color: var(--text-tertiary);
+}
+
+/* Add friend form */
+.addFriend {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.addFriend input {
+    flex: 1;
+}
+
+.addFriendBtn {
+    white-space: nowrap;
+}
+
+/* Friends list */
+.friendsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.friendItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+}
+
+.friendAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--accent-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.friendName {
+    flex: 1;
+    font-size: 0.938rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.friendActions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Empty friends */
+.emptyFriends {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--border);
+}
+
+.emptyFriendsIcon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.emptyFriendsText {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Status message */
+.status {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.813rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.statusError {
+    background: #fef2f2;
+    color: var(--danger);
+}
+
+.statusSuccess {
+    background: #ecfdf5;
+    color: var(--success);
+}
